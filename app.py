@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score, classification_report
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/',methods=['GET'])
 def hello_world():
     train_data = pd.read_csv("loan_data_train.csv")
 
