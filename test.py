@@ -3,9 +3,11 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from flask import Flask,request,json
+from flask_cors import CORS 
 import socket
 # Load the training dataset
 app=Flask(__name__)
+CORS(app)
 @app.route('/predict',methods=['POST'])
 def predict():
     data=request.json
@@ -61,7 +63,7 @@ def predict():
     y_pred_list = y_pred.tolist()
 
 # Serialize the list to JSON format
-    return {"Loan_Status:":json.dumps(y_pred_list[0])}
+    return {"Loan_Status":json.dumps(y_pred_list[0])}
     # Output predictions
     # output_df = pd.DataFrame({'Loan_ID': test_data.index, 'Loan_Status': y_pred})
     # output_df['Loan_Status'] = output_df['Loan_Status'].map({1: 'Y', 0: 'N'})
