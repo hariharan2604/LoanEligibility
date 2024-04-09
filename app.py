@@ -79,5 +79,9 @@ def hello_world():
     print(classification_rep)
     return json.dumps(classification_rep)
 
+@app.route('/test',methods=['GET'])
+def cmd():
+    return "hariharan data"
+
 if __name__ == '__main__':
     app.run(debug=True)
