@@ -84,4 +84,6 @@ def cmd():
     return "hariharan data"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Get the host's IP address dynamically
+    host_ip = socket.gethostbyname(socket.gethostname())
+    app.run(host=host_ip, debug=True)
