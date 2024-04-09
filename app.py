@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 import json
 import socket
 import pandas as pd
@@ -8,12 +8,16 @@ from sklearn.metrics import accuracy_score, classification_report
 
 app = Flask(__name__)
 
-@app.route('/',methods=['GET'])
+@app.route('/',methods=['POST'])
 def hello_world():
+    data = request.json
+
+    # Create DataFrame
+    test_data = pd.DataFrame(data)
     train_data = pd.read_csv("loan_data_train.csv")
 
     # Load the test dataset
-    test_data = pd.read_csv("loan_data_test.csv")
+    # test_data = pd.read_csv("loan_data_test.csv")
 
     # Drop irrelevant features (Loan_ID)
     train_data.drop("Loan_ID", axis=1, inplace=True)
@@ -73,16 +77,12 @@ def hello_world():
     # which are usually not available in real-world scenarios where you're predicting on unseen data.
     test_data['Loan_Status'] = test_data['Loan_Status'].map({'Y': 1, 'N': 0})
     y_test=test_data['Loan_Status']
-    accuracy = accuracy_score(y_test, y_pred)
-    classification_rep = classification_report(y_test, y_pred)
-    print("Accuracy:", accuracy)
-    print("Classification Report:")
-    print(classification_rep)
-    return json.dumps(classification_rep)
+    # accuracy = accuracy_score(y_test, y_pred)
+    # classification_rep = classification_report(y_test, y_pred)
+    return {"loan_status":json.dumps(y_pred)}
+    
+        
 
-@app.route('/test',methods=['GET'])
-def cmd():
-    return "hariharan data"
 
 if __name__ == '__main__':
     # Get the host's IP address dynamically
