@@ -1,5 +1,6 @@
 from flask import Flask
 import json
+import socket
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.ensemble import RandomForestClassifier
