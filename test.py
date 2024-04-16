@@ -84,4 +84,4 @@ def predict():
     # print(classification_rep)
 
 hostip=socket.gethostbyname(socket.gethostname())
-app.run(host=hostip)
+app.run()
