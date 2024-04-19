@@ -38,9 +38,9 @@ function submitForm() {
     };
 
     axios
-        .post("http://127.0.0.1:5000/predict", formData)
+        .post("http://192.168.86.199:5000/predict", formData)
         .then(function (response) {
-            let res = response.data.Loan_Status ? "Eligible" : "Not Eligible";
+            let res = response.data.Loan_Status==1 ? "Eligible" : "Not Eligible";
             showModal(response.data.Loan_Status);
         })
         .catch(function (error) {
@@ -52,7 +52,7 @@ function submitForm() {
 function showModal(message) {
     var modal = document.getElementById("myModal");
     var modalMessage = document.getElementById("modalMessage");
-    modalMessage.innerHTML = "<p>"+message ? "Congratulations! You are Eligible to get a Loan ✅" :"Sorry! You aren't Eligible to get the Loan ❌" +"</p>";
+    modalMessage.innerHTML = "<p>"+message=="1" ? "Congratulations! You are Eligible to get a Loan ✅" :"Sorry! You aren't Eligible to get the Loan ❌" +"</p>";
     modal.style.display = "block";
 
     // Close the modal when the user clicks anywhere outside of it
